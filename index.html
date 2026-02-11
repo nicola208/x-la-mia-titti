@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>San Valentino</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 40px;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-family: 'Dancing Script', cursive;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 250px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.2s ease;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+
+    #yes {
+      background-color: #4CAF50;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: beat 1s infinite;
+    }
+
+    #no {
+      background-color: #f44336;
+      color: white;
+      left: 30%;
+      top: 80px;
+    }
+
+    @keyframes beat {
+      0%   { transform: translateX(-50%) scale(1); }
+      50%  { transform: translateX(-50%) scale(1.1); }
+      100% { transform: translateX(-50%) scale(1); }
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 24px;
+      animation: fly 1.5s ease-out forwards;
+      color: white;
+    }
+
+    @keyframes fly {
+      from { transform: translate(0,0) scale(1); opacity:1; }
+      to { transform: translate(var(--x), var(--y)) scale(0.5); opacity:0; }
+    }
+
+    #final-message {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 48px;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    video {
+      display: block;
+      margin: 30px auto;
+      width: 80%;
+      max-width: 700px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Vuoi essere la mia valentina 😋?</h1>
+
+  <div class="buttons">
+    <button id="yes" onclick="yesClicked()">SÌ AMORE MIO 🤍</button>
+    <button id="no" onclick="moveNo()">NOOO 😡</button>
+  </div>
+
+  <script>
+    let messages = ["Sei sicura? 🥺", "Daiii 😭", "Ripensaci"];
+    let count = 0;
+    let scale = 1;
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+
+      const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      noBtn.innerText = messages[count % messages.length];
+      count++;
+
+      scale -= 0.05;
+      if (scale < 0.5) scale = 0.5;
+      noBtn.style.transform = `scale(${scale})`;
+    }
+
+    function yesClicked() {
+
+      // Effetto cuori
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "🤍";
+        heart.style.left = "50%";
+        heart.style.top = "50%";
+        heart.style.setProperty("--x", (Math.random() * 500 - 250) + "px");
+        heart.style.setProperty("--y", (Math.random() * 500 - 250) + "px");
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1500);
+      }
+
+      setTimeout(() => {
+        document.body.innerHTML = `
+          <div id="final-message">
+            TI AMO TITTIMIA🤍
+            <video autoplay loop controls>
+              <source src="stelle.mp4" type="video/mp4">
+              Il tuo browser non supporta il video.
+            </video>
+          </div>
+        `;
+      }, 800);
+    }
+  </script>
+
+</body>
+</html>
