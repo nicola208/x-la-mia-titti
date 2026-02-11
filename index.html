@@ -106,27 +106,21 @@
 
     function moveNo() {
       const noBtn = document.getElementById("no");
-
       const maxX = window.innerWidth - noBtn.offsetWidth - 20;
       const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
-
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
-
       noBtn.innerText = messages[count % messages.length];
       count++;
-
       scale -= 0.05;
       if (scale < 0.5) scale = 0.5;
       noBtn.style.transform = `scale(${scale})`;
     }
 
     function yesClicked() {
-
-      // Effetto cuori
+      // Cuoricini volanti
       for (let i = 0; i < 30; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
@@ -139,14 +133,27 @@
         setTimeout(() => heart.remove(), 1500);
       }
 
+      // Sostituisci contenuto con testo + video
       setTimeout(() => {
         document.body.innerHTML = `
           <div id="final-message">
             TI AMO TITTIMIA🤍
+            <video id="valentineVideo" autoplay loop controls>
               <source src="stelle.mp4" type="video/mp4">
+              Il tuo browser non supporta il video.
             </video>
           </div>
         `;
+
+        // Forza l’avvio su mobile browser
+        const video = document.getElementById("valentineVideo");
+        video.muted = false;
+        video.play().catch(() => {
+          // Se il browser blocca autoplay con audio, parte silenzioso
+          video.muted = true;
+          video.play();
+        });
+
       }, 800);
     }
   </script>
