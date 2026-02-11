@@ -79,11 +79,12 @@
       font-family: 'Dancing Script', cursive;
     }
 
-    video {
+    iframe {
       display: block;
       margin: 30px auto;
       width: 80%;
       max-width: 700px;
+      height: 400px;
       border-radius: 20px;
       box-shadow: 0 0 25px rgba(255,255,255,0.3);
     }
@@ -133,15 +134,17 @@
         setTimeout(() => heart.remove(), 1500);
       }
 
-      // Mostra messaggio + video senza autoplay
+      // Mostra messaggio + video YouTube senza autoplay
       setTimeout(() => {
         document.body.innerHTML = `
           <div id="final-message">
             TI AMO TITTIMIA🤍
-            <video loop controls>
-              <source src="stelle.mp4" type="video/mp4">
-              Il tuo browser non supporta il video.
-            </video>
+            <iframe
+              src="https://www.youtube.com/embed/R8XlTGlLQRo?controls=1&loop=1&playlist=R8XlTGlLQRo"
+              frameborder="0"
+              allow="encrypted-media"
+              allowfullscreen>
+            </iframe>
           </div>
         `;
       }, 800);
@@ -150,3 +153,4 @@
 
 </body>
 </html>
+
