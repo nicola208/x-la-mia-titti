@@ -79,11 +79,12 @@
       font-family: 'Dancing Script', cursive;
     }
 
-    video {
+    iframe {
       display: block;
       margin: 30px auto;
       width: 80%;
       max-width: 700px;
+      height: 400px;
       border-radius: 20px;
       box-shadow: 0 0 25px rgba(255,255,255,0.3);
     }
@@ -133,30 +134,23 @@
         setTimeout(() => heart.remove(), 1500);
       }
 
-      // Sostituisci contenuto con testo + video
+      // Mostra testo + video YouTube
       setTimeout(() => {
         document.body.innerHTML = `
           <div id="final-message">
             TI AMO TITTIMIA🤍
-            <video id="valentineVideo" autoplay loop controls>
-              <source src="stelle.mp4" type="video/mp4">
-              Il tuo browser non supporta il video.
-            </video>
+            <iframe
+              src="https://www.youtube.com/embed/R8XlTGlLQRo?autoplay=1&controls=0&loop=1&playlist=R8XlTGlLQRo"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen>
+            </iframe>
           </div>
         `;
-
-        // Forza l’avvio su mobile browser
-        const video = document.getElementById("valentineVideo");
-        video.muted = false;
-        video.play().catch(() => {
-          // Se il browser blocca autoplay con audio, parte silenzioso
-          video.muted = true;
-          video.play();
-        });
-
       }, 800);
     }
   </script>
 
 </body>
 </html>
+
